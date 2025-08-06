@@ -1,0 +1,69 @@
+# 🧾 Project Overview
+
+This repository contains **two independent Flask-based projects**:
+
+1. **📍 Google Maps Coordinate Tracker**  
+2. **🔐 Two-Factor Authentication System**
+
+Each project is self-contained with its own purpose and functionality.
+
+###You can test all endpoints using Postman (link below).
+
+📫 Postman Collection
+👉 Click to View Postman Collection (https://documenter.getpostman.com/view/31243852/2sB3BBrCRt)
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Shivani-Chauhan-Dev/two_factor_auth
+
+### for google map project
+cd google_map   
+
+### for two factor authentication project
+cd two_factor_authentication
+
+### 🗂️ Folder: `google_map/`
+
+### 🚀 Features
+- HTML form input for coordinates
+- Map marker display using **Google Maps JavaScript API**
+- REST API to fetch and store location data
+
+### 📦 Technologies
+- Flask
+- Google Maps JavaScript API
+
+### 📄 Setup Instructions
+
+```bash
+cd google_map
+# Create virtual environment
+python -m venv venv
+# Activate (Windows)
+venv\Scripts\activate
+# Activate (Mac/Linux)
+source venv/bin/activate
+
+pip install -r requirements.txt
+python app.py
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+🗂️ Folder: two_factor_authentication/
+
+### 📄 Setup Instructions
+
+```bash
+cd two_factor_authentication
+# Create virtual environment
+python -m venv venv
+# Activate (Windows)
+venv\Scripts\activate
+# Activate (Mac/Linux)
+source venv/bin/activate
+
+pip install -r requirements.txt
+python main.py

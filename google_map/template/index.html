@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Map Coordinate Viewer</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2GY7IRyLB5UHhwLeiNe05pBHe1fd8SSI"></script>
+  <style>
+    #map {
+      height: 500px;
+      width: 100%;
+    }
+    input, button {
+      margin-top: 10px;
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Enter Latitude and Longitude</h2>
+  <input type="text" id="latitude" placeholder="Latitude">
+  <input type="text" id="longitude" placeholder="Longitude">
+  <button onclick="goToLocation()">Go</button>
+
+  <div id="map"></div>
+
+  <script>
+    let map;
+
+    function initMap() {
+      const defaultLocation = { lat: 28.6139, lng: 77.2090 }; // Delhi by default
+      map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 5,
+        center: defaultLocation,
+      });
+
+      // Load saved coordinates from backend
+      fetch("/api/coordinates")
+        .then(res => res.json())
+        .then(data => {
+          data.forEach(coord => {
+            new google.maps.Marker({
+              position: { lat: coord.lat, lng: coord.lng },
+              map: map,
+            });
+          });
+        });
+    }
+
+    function goToLocation() {
+      const lat = parseFloat(document.getElementById("latitude").value);
+      const lng = parseFloat(document.getElementById("longitude").value);
+
+      if (isNaN(lat) || isNaN(lng)) {
+        alert("Please enter valid coordinates.");
+        return;
+      }
+
+      const location = { lat, lng };
+
+      map.setCenter(location);
+      map.setZoom(10);
+
+      const marker = new google.maps.Marker({
+        position: location,
+        map: map,
+      });
+
+      // Save to backend
+      fetch("http://localhost:5004/api/points", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ latitude: lat, longitude: lng }),
+      }).then(res => {
+        if (!res.ok) {
+          console.error("Failed to save coordinate");
+        }
+      });
+    }
+
+    window.onload = initMap;
+  </script>
+</body>
+</html>
