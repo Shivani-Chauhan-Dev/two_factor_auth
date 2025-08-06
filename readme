@@ -17,7 +17,7 @@ Each project is self-contained with its own purpose and functionality.
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/Shivani-Chauhan-Dev/two_factor_auth
+git clone https://github.com/Shivani-Chauhan-Dev/two_factor_auth.git
 
 ### for google map project
 cd google_map   
